@@ -1,0 +1,11 @@
+<div class="block-gallery">
+    {% if value.title %}
+        <h3>{{ value.title }}</h3>
+    {% endif %}
+    
+    <div class="gallery-grid">
+        {% for image in value.images %}
+            {% include "ghost_stories/blocks/gallery_image_block.html" with value=image %}
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}{{ page.title }} | Derby Ghost Stories{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'ghost_stories/css/location.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="location-container">
+    <div class="location-header" 
+    {% if page.featured_image %}style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('{% image page.featured_image width-1200 as img %}{{ img.url }}');"{% endif %}
+        
+        <a href="{{ page.get_parent.url }}" class="back-to-map">
+            <i class="fas fa-arrow-left"></i> Back to Map
+        </a>
+        
+        <h1>{{ page.title }}</h1>
+        <p class="location-description">{{ page.description }}</p>
+        
+        <div class="location-address">
+            {% if page.address %}
+                <i class="fas fa-map-marker-alt"></i> {{ page.address }}
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="location-content">
+        {% if page.history %}
+            <div class="location-history">
+                <h2>History</h2>
+                {{ page.history|richtext }}
+            </div>
+        {% endif %}
+        
+        <div class="stories-section">
+            <h2>Ghost Stories</h2>
+            
+            {% if stories %}
+                <div class="story-grid">
+                    {% for story in stories %}
+                        <div class="story-card">
+                            {% if story.main_image %}
+                                <div class="story-image">
+                                    {% image story.main_image fill-400x250 %}
+                                </div>
+                            {% endif %}
+                            
+                            <div class="story-details">
+                                <h3>{{ story.title }}</h3>
+                                <p class="story-summary">{{ story.summary }}</p>
+                                
+                                {% if story.year %}
+                                    <div class="story-year">{{ story.year }}</div>
+                                {% endif %}
+                                
+                                <a href="{{ story.url }}" class="read-story">
+                                    Read the Story <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="no-stories">No stories have been added yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

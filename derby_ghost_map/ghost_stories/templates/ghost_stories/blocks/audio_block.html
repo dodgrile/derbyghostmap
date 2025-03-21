@@ -1,0 +1,14 @@
+{% load wagtaildocs_tags %}
+
+<div class="block-audio">
+    <h3>{{ value.title }}</h3>
+    
+    <audio controls {% if value.autoplay %}autoplay{% endif %} {% if value.loop %}loop{% endif %}>
+        <source src="{% document_url value.audio %}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    {% if value.caption %}
+        <div class="caption">{{ value.caption }}</div>
+    {% endif %}
+</div>

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}{{ page.title }} | Derby Ghost Stories{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+      crossorigin=""/>
+      <link rel="stylesheet" href="{% static 'ghost_stories/css/ghost_map.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="map-container">
+    <div class="intro-panel">
+        <h1>{{ page.title }}</h1>
+        {{ page.introduction|richtext }}
+        
+        <div class="map-instructions">
+            <h3><i class="fas fa-question-circle"></i> How to use this map</h3>
+            <p>Click on any marker to discover ghost stories from that location. Each location may have multiple stories to explore.</p>
+        </div>
+    </div>
+    
+    <div id="ghost-map" data-center-lat="{{ page.map_center_latitude }}" 
+         data-center-lng="{{ page.map_center_longitude }}"
+         data-zoom="{{ page.map_zoom_level }}"
+         data-api-url="{% url 'map_locations_api' %}">
+    </div>
+    
+    <div class="location-preview" id="location-preview">
+        <div class="preview-content">
+            <h2 id="preview-title"></h2>
+            <div id="preview-image"></div>
+            <p id="preview-description"></p>
+            <div class="story-count">
+                <span id="preview-story-count"></span> Ghost Stories
+            </div>
+            <button id="view-location-btn" class="btn btn-dark">
+                View Stories <i class="fas fa-book-dead"></i>
+            </button>
+        </div>
+        <button class="close-preview" id="close-preview">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    {% if locations %}
+    <div class="location-list">
+        <h2>Haunted Locations</h2>
+        <div class="location-grid">
+            {% for location in locations %}
+            <div class="location-card" data-lat="{{ location.latitude }}" data-lng="{{ location.longitude }}">
+                <h3>{{ location.title }}</h3>
+                {% if location.featured_image %}
+                    {% image location.featured_image fill-300x200 class="location-thumbnail" %}
+                {% endif %}
+                <p>{{ location.description }}</p>
+                <div class="story-badge">{{ location.story_count }} stories</div>
+                <a href="{{ location.url }}" class="location-link">
+                    Explore Location <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+        crossorigin=""></script>
+        <script src="{% static 'ghost_stories/js/ghost_map.js' %}"></script>
+{% endblock %}

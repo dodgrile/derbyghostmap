@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}{{ page.title }} | {{ page.get_parent.title }} | Derby Ghost Stories{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'ghost_stories/css/story.css' %}">
+{% endblock %}
+
+{% block body_class %}story-page{% endblock %}
+
+{% block content %}
+<article class="story">
+    <div class="story-header"
+    {% if page.main_image %}style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('{% image page.main_image width-1200 as img %}{{ img.url }}');"{% endif %}
+            <div class="location-breadcrumb">
+            <a href="{{ page.get_parent.url }}">
+                <i class="fas fa-map-marker-alt"></i> {{ page.get_parent.title }}
+            </a>
+        </div>
+        
+        <h1>{{ page.title }}</h1>
+        
+        <div class="story-meta">
+            {% if page.year %}
+            <span class="story-year">{{ page.year }}</span>
+            {% endif %}
+            
+            {% if page.author %}
+            <span class="story-author">Written by {{ page.author }}</span>
+            {% endif %}
+        </div>
+        
+        <div class="story-summary">
+            {{ page.summary }}
+        </div>
+    </div>
+    
+    {% if page.narration %}
+    <div class="audio-player-container">
+        <button id="toggle-narration" class="narration-toggle">
+            <i class="fas fa-headphones"></i> Listen to the story
+        </button>
+        
+        <div id="audio-player" class="audio-player hidden">
+            <audio controls>
+                <source src="{{ page.narration.url }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            
+            <div class="audio-controls">
+                <label class="ambient-toggle">
+                    <input type="checkbox" id="ambient-toggle" checked>
+                    <span>Background Sounds</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    <div class="story-content">
+        {{ page.story_content }}
+    </div>
+    
+    {% if page.sources %}
+    <div class="story-sources">
+        <h3>Sources & Further Reading</h3>
+        {{ page.sources|richtext }}
+    </div>
+    {% endif %}
+    
+    <div class="story-navigation">
+        {% with siblings=page.get_siblings %}
+            {% if siblings.count > 1 %}
+                <h3>More stories from {{ page.get_parent.title }}</h3>
+                <div class="story-links">
+                    {% for sibling in siblings %}
+                        {% if sibling.id != page.id %}
+                            <a href="{{ sibling.url }}" class="story-link">
+                                <span class="story-link-title">{{ sibling.title }}</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <a href="{{ page.get_parent.url }}" class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i> Back to {{ page.get_parent.title }}
+        </a>
+        
+        <a href="{% pageurl page.get_parent.get_parent %}" class="btn btn-dark">
+            <i class="fas fa-map"></i> Return to Map
+        </a>
+    </div>
+</article>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'ghost_stories/js/story.js' %}"></script>
+{% endblock %}

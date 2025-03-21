@@ -1,0 +1,101 @@
+/* Global styling for Derby Ghost Stories */
+body {
+    background-color: #121212;
+    background-image: url("/static/ghost_stories/images/dark-texture.0e6bde73879d.png");
+    color: #f0f0f0;
+    font-family: 'Lora', Georgia, serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', 'Cinzel', serif;
+    font-weight: 700;
+}
+
+a {
+    color: #b18e60;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #d4af6a;
+}
+
+.main-content {
+    background-color: rgba(18, 18, 18, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* Header styling */
+header {
+    background-color: rgba(10, 10, 10, 0.9);
+    border-bottom: 3px solid #6e0e0e;
+    padding: 15px 0;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.site-title {
+    font-family: 'Cinzel Decorative', 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.site-title a {
+    color: #f0f0f0;
+    text-decoration: none;
+}
+
+/* Footer styling */
+footer {
+    background-color: rgba(10, 10, 10, 0.9);
+    border-top: 3px solid #6e0e0e;
+    padding: 15px 0;
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+/* Button styling */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+    font-family: 'Lora', Georgia, serif;
+}
+
+.btn-primary {
+    background-color: #6e0e0e;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #850e0e;
+    color: #fff;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #f0f0f0;
+    border: 2px solid #6e0e0e;
+}
+
+.btn-outline:hover {
+    background-color: #6e0e0e;
+    color: #fff;
+}
