@@ -1,0 +1,1 @@
+web: gunicorn derby_ghost_map.wsgi:application
