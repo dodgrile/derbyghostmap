@@ -1,4 +1,6 @@
 from .base import *
+import sentry_sdk
+
 
 DEBUG = False
 
@@ -35,3 +37,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+
+# Sentry config
+
+sentry_sdk.init(
+    dsn="https://ad71150c13c1c787238fc9bcfa18c8cf@o4506934068051968.ingest.us.sentry.io/4506934069297152",
+    # Add data like request headers and IP for users,
+    # see https://docs.sentry.io/platforms/python/data-management/data-collected/ for more info
+    send_default_pii=True,
+)
