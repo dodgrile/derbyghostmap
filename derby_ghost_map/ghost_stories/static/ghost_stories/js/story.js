@@ -62,7 +62,7 @@ function setupAmbientSounds() {
     
     if (ambientToggle) {
         // Create ambient sound
-        const ambientSound = new Audio('/static/ghost_stories/audio/ambient-background.mp3');
+        const ambientSound = new Audio('/media/ghost_stories/audio/ambient-background.mp3');
         ambientSound.loop = true;
         ambientSound.volume = 0.15;
         
