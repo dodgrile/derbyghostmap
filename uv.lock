@@ -78,12 +78,14 @@ name = "derbyghosts"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "pillow" },
     { name = "sentry-sdk", extra = ["django"] },
     { name = "wagtail" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "pillow", specifier = ">=11.1.0" },
     { name = "sentry-sdk", extras = ["django"], specifier = ">=2.27.0" },
     { name = "wagtail", specifier = ">=6.4.1" },
 ]
