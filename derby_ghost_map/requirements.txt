@@ -2,7 +2,9 @@ Django>=5.1,<5.2
 wagtail>=6.4,<6.5
 gunicorn==21.2.0
 psycopg2-binary==2.9.9
-whitenoise==6.5.0
 dj-database-url==2.0.0
 sentry-sdk==2.27.0
 Pillow>=10.0.0
+brotli==1.1.0
+whitenoise==6.9.0
+uvicorn==0.34.2

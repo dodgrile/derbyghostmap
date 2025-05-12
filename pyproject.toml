@@ -7,5 +7,7 @@ requires-python = ">=3.13"
 dependencies = [
     "pillow>=11.1.0",
     "sentry-sdk[django]>=2.27.0",
+    "uvicorn>=0.34.2",
     "wagtail>=6.4.1",
+    "whitenoise[brotli]>=6.9.0",
 ]
