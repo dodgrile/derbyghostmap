@@ -139,7 +139,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = "/media/"  # This should match your Render disk mount point
 MEDIA_URL = "/media/"
 
 # Default storage settings, with the staticfiles storage updated.
@@ -147,6 +147,9 @@ MEDIA_URL = "/media/"
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "OPTIONS": {
+            "location": "/media/",
+        },
     },
     # ManifestStaticFilesStorage is recommended in production, to prevent
     # outdated JavaScript / CSS assets being served from cache
